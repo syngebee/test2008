@@ -10,8 +10,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriUtils;
 
@@ -27,7 +25,6 @@ public class myContorller {
     private UserService userService;
 
     @RequestMapping("/login")
-    @ResponseBody
     public ModelAndView login(User user){
         ModelAndView mv = new ModelAndView();
         Boolean login = userService.login(user);
@@ -38,7 +35,7 @@ public class myContorller {
             mv.addObject("msg","登陆失败");
         }
         mv.setViewName("/static/result.jsp");
-        return null;
+        return mv;
     }
 
     @RequestMapping("/download")
@@ -54,7 +51,8 @@ public class myContorller {
             String encodeFilename = UriUtils.encode(filename, "UTF-8");
 //            headers.set("Content-Disposition", "attachment;filename=" +encodeFilename); // 该方式filename不起效
             headers.setContentDispositionFormData("attachment",encodeFilename);
-            return new ResponseEntity<>(IOUtils.toByteArray(is), headers, HttpStatus.OK);
+//            return new ResponseEntity<>(IOUtils.toByteArray(is), headers, HttpStatus.OK); //普通构造
+            return ResponseEntity.ok().headers(headers).body(IOUtils.toByteArray(is));//流式构造 酷
         }
     }
 }
