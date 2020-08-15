@@ -40,6 +40,7 @@ public class myContorller {
 
     @RequestMapping("/download")
     public ResponseEntity<byte[]> download(String filename, HttpServletRequest req) throws IOException {
+        //获取上下文对象
         ServletContext servletContext = req.getServletContext();
         //读取文件
         try (InputStream is = servletContext.getResourceAsStream("/WEB-INF/" + filename)) {
