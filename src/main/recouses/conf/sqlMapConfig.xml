@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--Mybatis全局设置-->
+    <settings>
+        <!--设置mybatis输出日志-->
+        <setting name="logImpl" value="LOG4J"/>
+        <!--懒加载开关-->
+        <!--<setting name="lazyLoadingEnabled" value="true"/>-->
+        <!--二级缓存开关-->
+        <!--<setting name="cacheEnabled" value="true"/>-->
+    </settings>
+
+    <!--别名位置-->
+    <typeAliases>
+        <package name="cn.itheima.pojo"/>
+    </typeAliases>
+
+    <!--映射文件-->
+    <mappers>
+        <package name="cn.itheima.dao"/>
+    </mappers>
+</configuration>
